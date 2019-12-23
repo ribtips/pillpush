@@ -2,10 +2,10 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
-const char* ssid = "ThunderDome";
-const char* password = "2MayEnter";
-const uint16_t port = 8091;
-const char* host = "192.168.1.23";
+const char* ssid = "XXXXXXXXXXXX"; #whatever your wifi network is
+const char* password = "XXXXXXXXXXX"; #whatever your wifi password is
+const uint16_t port = 1234; #whatever TCP port you want to connect to
+const char* host = "xxx.xxx.xxx.xxx"; #whatever your internal server is
 uint8_t LED1pin = D7;
 bool LED1status = LOW;
 uint8_t LED2pin = D6;

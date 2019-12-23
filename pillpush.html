@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript</title>
+		<style type="text/css">
+
+			.square {
+				background-color:red;
+				width:150px;
+				height:100px;
+				margin:5px;
+				border-radius:25px;
+				text-align: center;
+				font-size: 120%
+			}
+			
+		</style>		
+	</head>
+
+	<body>
+		<center>
+		<table><tr><td><h1>Current Week</h1></td><td><h1>Previous Week</h1></td></tr>
+		<tr><td>
+			<table>
+			<tr>
+				<td>
+					<div id="CurrMonAM" class=square>Monday AM</div>
+				</td>
+				<td>
+					<div id="CurrMonPM" class=square>Monday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="CurrTueAM" class=square>Tuesday AM</div>
+				</td>
+				<td>
+					<div id="CurrTuePM" class=square>Tuesday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="CurrWedAM" class=square>Wednesday AM</div>
+				</td>
+				<td>
+					<div id="CurrWedPM" class=square>Wednesday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="CurrThuAM" class=square>Thursday AM</div>
+				</td>
+				<td>
+					<div id="CurrThuPM" class=square>Thursday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="CurrFriAM" class=square>Friday AM</div>
+				</td>
+				<td>
+					<div id="CurrFriPM" class=square>Friday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="CurrSatAM" class=square>Saturday AM</div>
+				</td>
+				<td>
+					<div id="CurrSatPM" class=square>Saturday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="CurrSunAM" class=square>Sunday AM</div>
+				</td>
+				<td>
+					<div id="CurrSunPM" class=square>Sunday PM</div>
+				</td>
+			</tr>		
+		</table>
+		</td>
+		<td>
+		<table>
+			<tr>
+				<td>
+					<div id="PrevMonAM" class=square>Monday AM</div>
+				</td>
+				<td>
+					<div id="PrevMonPM" class=square>Monday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="PrevTueAM" class=square>Tuesday AM</div>
+				</td>
+				<td>
+					<div id="PrevTuePM" class=square>Tuesday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="PrevWedAM" class=square>Wednesday AM</div>
+				</td>
+				<td>
+					<div id="PrevWedPM" class=square>Wednesday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="PrevThuAM" class=square>Thursday AM</div>
+				</td>
+				<td>
+					<div id="PrevThuPM" class=square>Thursday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="PrevFriAM" class=square>Friday AM</div>
+				</td>
+				<td>
+					<div id="PrevFriPM" class=square>Friday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="PrevSatAM" class=square>Saturday AM</div>
+				</td>
+				<td>
+					<div id="PrevSatPM" class=square>Saturday PM</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="PrevSunAM" class=square>Sunday AM</div>
+				</td>
+				<td>
+					<div id="PrevSunPM" class=square>Sunday PM</div>
+				</td>
+			</tr>		
+		</table>
+		</td></tr>
+	    </table>
+	</center>	
+		<script type="text/javascript">
+//			document.getElementById("CurrMonAM").innerHTML = "Monday Morning";
+//			document.getElementById("MonAM").style.backgroundColor = "green";
+//			document.getElementById("SatPM").style.backgroundColor = "green"
+			
+			function fetchJSONFile(path, callback) {
+				var httpRequest = new XMLHttpRequest();
+				httpRequest.onreadystatechange = function() {
+				if (httpRequest.readyState == 4) {
+					if (httpRequest.status == 200) {
+						var data = JSON.parse(httpRequest.responseText);
+					if (callback) callback(data);
+					}
+					}
+				};
+				httpRequest.open('GET', path);
+				httpRequest.send(); 
+			}
+
+			fetchJSONFile('data.json', function(data){
+			//	console.log(data[0]["MonPM"]["time"]);
+				var x;
+				var obj = JSON.parse(data);
+//				document.getElementById("CurrSunPM").innerHTML = obj.CurrSunPM.match;
+//				console.log("data is: ",obj["CurrSunPM"]["start"]);
+				for (x in obj) {
+			    	console.log(x);
+//					console.log(data[x]["current"]);
+					if (obj[x]["current"] == 1) {
+						console.log(obj[x]["current"]);
+						document.getElementById(x).style.backgroundColor = "green";
+						document.getElementById(x).innerHTML = document.getElementById(x).innerHTML + "<br>" + obj[x]["match"];
+					}
+				}
+				});
+			
+		</script>
+
+</body>
+
+
+</html>
